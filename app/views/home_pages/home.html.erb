@@ -1,1 +1,2 @@
-<%= content_tag :h2, 'Welcome Home', class: 'basic-header' %>
+<%= content_tag :h2, "Welcome Home", class: 'basic-header' %>
+<%= content_tag :p, "You have #{pluralize @lists.count, 'list'}" %>
