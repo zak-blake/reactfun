@@ -11,7 +11,15 @@ var ListsContainer = React.createClass({
       (data) => this.setState({lists: data})
     );
   },
+  addList(newList) {
+    this.setState({lists: this.state.lists.concat([newList])});
+  },
   render() {
-    return <Lists lists={this.state.lists} />;
+    return (
+      <div>
+        <Lists lists={this.state.lists} />
+        <NewListForm addList={this.addList} />
+      </div>
+    );
   }
 });

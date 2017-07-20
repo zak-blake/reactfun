@@ -1,14 +1,15 @@
 var Lists = React.createClass({
   render() {
-    console.log(this.props.lists);
     var lists = this.props.lists.map((list) => {
       return (
-        <div key={list.id}>
-          <p>{list.name}</p>
-        </div>
+        <List key={list.id} list={list} />
       );
     });
 
-    return <div>{lists}</div>;
+    return (
+      <div>
+        {lists}
+      </div>
+    );
   }
 });

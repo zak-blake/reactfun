@@ -26,6 +26,8 @@ class ListsController < ApplicationController
   def create
     @list = List.new(list_params)
 
+    @list.user = current_user
+
     respond_to do |format|
       if @list.save
         format.html { redirect_to @list, notice: 'List was successfully created.' }

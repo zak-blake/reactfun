@@ -1,5 +1,9 @@
 var List = React.createClass({
   render() {
-    return <div>{this.props.list.name}</div>
+    return (
+      <div className="list">
+        {this.props.list.name}
+      </div>
+    );
   }
 })
