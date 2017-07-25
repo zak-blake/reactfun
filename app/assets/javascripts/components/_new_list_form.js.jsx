@@ -28,9 +28,14 @@ var NewListForm = React.createClass({
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input type="text" placeholder="New List Name" value={ this.state.name } onChange={ this.handleNameChange } /><br />
-        <input type="submit" value="Create" />
+      <form onSubmit={this.handleSubmit} id="new-list-form">
+
+        <div className="form-group">
+          <label htmlFor="new-list-name">Add a List</label>
+          <input type="text" placeholder="Name" value={ this.state.name } onChange={ this.handleNameChange } id="new-list-name" className="form-control" />
+        </div>
+
+        <input type="submit" value="Create" className="btn btn-primary" />
       </form>
     );
   }
