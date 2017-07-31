@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170717025445) do
+ActiveRecord::Schema.define(version: 20170731023537) do
+
+  create_table "list_items", force: :cascade do |t|
+    t.string "name"
+    t.integer "list_id"
+    t.integer "priority"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "lists", force: :cascade do |t|
     t.string "name"

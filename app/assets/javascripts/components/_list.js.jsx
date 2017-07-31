@@ -14,7 +14,7 @@ var List = React.createClass({
 
     if(this.props.editableTitle) {
       title = <NewListTitleForm
-        list={this.props.list}        
+        list={this.props.list}
         replaceAllInstancesOfList={this.props.replaceAllInstancesOfList}
       />;
     } else {
@@ -38,6 +38,8 @@ var List = React.createClass({
           </div>
 
         </h4>
+
+        <ListItemsContainer  listId={this.props.list.id} />
       </div>
     );
   }
