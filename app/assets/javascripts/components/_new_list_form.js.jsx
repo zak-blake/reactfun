@@ -31,7 +31,7 @@ var NewListForm = React.createClass({
       <form onSubmit={this.handleSubmit} id="new-list-form">
 
         <div className="form-group">
-          <label htmlFor="new-list-name">Add a List</label>
+          <label htmlFor="new-list-name">New list</label>
           <input type="text"
             placeholder="Name"
             value={ this.state.name }

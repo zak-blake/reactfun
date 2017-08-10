@@ -1,6 +1,6 @@
 var ListsContainer = React.createClass({
   getInitialState() {
-    return { lists: [], editTitleListId: null };
+    return { lists: [], editTitleListId: null, addListItemListId: null };
   },
   componentDidMount() {
     this.fetchLists();
@@ -34,7 +34,16 @@ var ListsContainer = React.createClass({
 
   setListEditable(id) {
     this.setState(state => {
-      return {editTitleListId: id};
+      return {
+        addListItemListId: null,
+        editTitleListId: id
+      };
+    });
+  },
+
+  setListItemAddable(id) {
+    this.setState(state => {
+      return {addListItemListId: id, editTitleListId: null};
     });
   },
 
@@ -58,6 +67,8 @@ var ListsContainer = React.createClass({
           list={list}
           deleteList={this.deleteList}
           setListEditable={this.setListEditable}
+          setListItemAddable={this.setListItemAddable}
+          itemAddable={this.state.addListItemListId == list.id}
           replaceAllInstancesOfList={this.replaceAllInstancesOfList}
           editableTitle={list.id == this.state.editTitleListId}
         />

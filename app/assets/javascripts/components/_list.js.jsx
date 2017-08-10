@@ -21,25 +21,28 @@ var List = React.createClass({
       title = this.props.list.name;
     }
 
-    editButtonClass = this.props.editableTitle ? "btn disabled" : "btn" ;
+    editButtonClass = this.props.editableTitle ? "hidden" : "" ;
 
     return (
       <div className="list">
         <h4>
-          <span>{title}</span>
+          {title}
 
-          <div role="group" className="btn-group pull-right">
-            <button onClick={this.handleClickEdit} className={editButtonClass}>
-              <span className="glyphicon glyphicon-edit"></span>
-            </button>
-            <button onClick={this.handleClickDelete} className="btn">
-              <span className="glyphicon glyphicon-remove"></span>
-            </button>
-          </div>
-
+          <small className="pull-right">
+            <a onClick={this.handleClickEdit} className={editButtonClass}>
+              edit
+            </a>
+            &nbsp;
+            <a onClick={this.handleClickDelete} >
+              delete
+            </a>
+          </small>
         </h4>
 
-        <ListItemsContainer  listId={this.props.list.id} />
+        <ListItemsContainer
+          listId={this.props.list.id}
+          itemAddable={this.props.itemAddable}
+          setListItemAddable={this.props.setListItemAddable} />
       </div>
     );
   }

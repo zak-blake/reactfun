@@ -43,12 +43,20 @@ var NewListTitleForm = React.createClass({
       <form onSubmit={this.handleSubmit} id="list-title-form">
 
         <div className="input-group">
-          <input type="text" placeholder="ListName" value={ name } onChange={ this.handleNameChange } id="new-list-name" className="form-control" />
+          <input type="text"
+            placeholder="List name"
+            value={ name }
+            onChange={ this.handleNameChange }
+            id="new-list-name"
+            className="form-control" />
+
           <span className="input-group-btn">
-            <button type="submit" value="update" className="btn btn-secondary">
+
+            <button type="submit" value="update" className="btn btn-primary">
               <span className="glyphicon glyphicon-ok" aria-hidden="true"></span>
             </button>
-            <button onClick={this.handleCancelUpdate} className="btn btn-secondary">
+
+            <button onClick={this.handleCancelUpdate} className="btn btn-default">
               <span className="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
             </button>
           </span>
