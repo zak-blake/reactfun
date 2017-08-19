@@ -20,6 +20,25 @@ var ListItemsContainer = React.createClass({
     this.props.setListItemAddable(this.props.listId);
   },
 
+  handleClickDeleteListItem(listItemId) {
+    $.ajax({
+      url: `/list_items/${listItemId}`,
+      dataType: 'json',
+      type: 'DELETE',
+      context: this,
+      success(response) {
+
+        this.setState(state => {
+          var newListItems = this.state.listItems.filter((item) => {
+            return item.id != listItemId;
+          });
+
+          return {listItems: newListItems};
+        });
+      }
+    });
+  },
+
   closeAddItemForm() {
     this.props.setListItemAddable(null);
   },
@@ -44,7 +63,13 @@ var ListItemsContainer = React.createClass({
 
     listItems = this.state.listItems.map((item) => {
       return (
-        <li key={item.id}>{item.name}</li>
+        <li key={item.id}>
+          {item.name}
+          &nbsp;
+          <a onClick={() => this.handleClickDeleteListItem(item.id)}>
+            <span className="glyphicon glyphicon-remove-circle"></span>
+          </a>
+        </li>
       );
     });
 
