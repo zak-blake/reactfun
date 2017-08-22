@@ -1,8 +1,12 @@
+body {
+  background-color: $comfy-blue;
+}
+
 .btn-group > .btn {
   margin: 0 .3em 0 .3em;
 }
 
 .basic-header {
-  color: $color-ocean-blue;
+  color: $heavier-blue;
   margin-top: 20px;
 }

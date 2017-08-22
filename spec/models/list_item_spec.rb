@@ -26,4 +26,9 @@ RSpec.describe ListItem, type: :model do
     subject.name = nil
     expect(subject).not_to be_valid
   end
-end
+
+  it "should be invalid with out a status" do
+    subject.status = nil
+    expect(subject).to be_invalid
+  end
+ end
