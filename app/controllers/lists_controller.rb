@@ -5,10 +5,6 @@ class ListsController < ApplicationController
   # GET /lists.json
   def index
     @lists = current_user.lists
-      .select("lists.*, COUNT(list_items.id) as list_items_count, COUNT(CASE Status WHEN 1 THEN 1 ELSE NULL END) as list_items_complete_count")
-      .joins("LEFT OUTER JOIN list_items ON list_items.list_id = lists.id")
-      .group("lists.id").all
-    puts "Finish Controller"
   end
 
   # GET /lists/1

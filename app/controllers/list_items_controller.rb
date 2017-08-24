@@ -6,6 +6,7 @@ class ListItemsController < ApplicationController
   def index
     list = current_user.lists.find(params[:id])
     @list_items = list.list_items
+    @complete_count = @list_items.complete.length
   end
 
   # GET /list_items/1

@@ -78,8 +78,8 @@ var ListsContainer = React.createClass({
     return (
       <div>
         <p>You have {this.state.lists.length} lists.</p>
-        {lists}
         <NewListForm addList={this.addList} />
+        {lists}
       </div>
     );
   }
