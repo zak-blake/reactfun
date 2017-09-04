@@ -52,7 +52,7 @@ var NewListTitleForm = React.createClass({
 
           <span className="input-group-btn">
 
-            <button type="submit" value="update" className="btn btn-primary">
+            <button type="submit" value="update" className="btn btn-success">
               <span className="glyphicon glyphicon-ok" aria-hidden="true"></span>
             </button>
 

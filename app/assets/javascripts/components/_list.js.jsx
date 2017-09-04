@@ -30,7 +30,7 @@ var List = React.createClass({
 
           <small className="pull-right">
             <a onClick={this.handleClickEdit} className={editButtonClass}>
-              edit
+              rename
             </a>
             &nbsp;
             <a onClick={this.handleClickDelete} >

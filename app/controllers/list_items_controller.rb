@@ -66,11 +66,11 @@ class ListItemsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_list_item
-      @list_item = ListItem.find(params[:id])
+      @list_item = current_user.list_items.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def list_item_params
-      params.require(:list_item).permit(:name, :list_id, :priority)
+      params.require(:list_item).permit(:name, :list_id, :priority, :status)
     end
 end

@@ -54,6 +54,46 @@ var ListItemsContainer = React.createClass({
     });
   },
 
+  handleClickCompleteListItem(item) {
+    $.ajax({
+      url: `/list_items/${item.id}`,
+      data: { list_item: { status: 'complete' } },
+      dataType: 'json',
+      type: 'PATCH',
+      context: this,
+      success(updated_item) {
+        let newListItems = this.state.listItems.map((item) => {
+          return item.id == updated_item.id ? updated_item : item;
+        });
+
+        this.setState({
+          completeCount: (this.state.completeCount + 1),
+          listItems: newListItems
+        });
+      }
+    });
+  },
+
+  handleClickResetListItem(item) {
+    $.ajax({
+      url: `/list_items/${item.id}`,
+      data: { list_item: { status: 'incomplete' } },
+      dataType: 'json',
+      type: 'PATCH',
+      context: this,
+      success(updated_item) {
+        let newListItems = this.state.listItems.map((item) => {
+          return item.id == updated_item.id ? updated_item : item;
+        });
+
+        this.setState({
+          completeCount: (this.state.completeCount - 1),
+          listItems: newListItems
+        });
+      }
+    });
+  },
+
   closeAddItemForm() {
     this.props.setListItemAddable(null);
   },
@@ -64,6 +104,27 @@ var ListItemsContainer = React.createClass({
     let completion = (total == 0 || complete == 0) ? 0 : Math.round(complete/total*100);
 
     return "completion compl-" + completion;
+  },
+
+  completionAction(item) {
+    return (
+      <div>
+        <a id={"list-item-" + item.id + "-reset"}
+          className={item.status == "complete" ? "" : "hidden"}
+          onClick={() => this.handleClickResetListItem(item)}>
+
+            <span className="glyphicon glyphicon-repeat"></span>
+        </a>
+
+
+        <a id={"list-item-" + item.id + "-complete"}
+          className={item.status == "complete" ? "hidden" : ""}
+          onClick={() => this.handleClickCompleteListItem(item)}>
+
+            <span className="glyphicon glyphicon-ok"></span>
+        </a>
+      </div>
+    );
   },
 
   render() {
@@ -78,17 +139,38 @@ var ListItemsContainer = React.createClass({
       );
     }else{
       addListItem = (
-        <a onClick={this.handleClickAddListItem}>
-          Add Item
-        </a>
+        <button onClick={this.handleClickAddListItem} className="btn btn-default">
+          <span className="glyphicon glyphicon-plus"></span>&nbsp;
+          Item
+        </button>
       );
     }
 
     listItems = this.state.listItems.map((item) => {
       return (
-        <li key={item.id}>
+        <li key={item.id} id={"list-item-" + item.id} className={item.status}>
           {item.name}
+
           &nbsp;
+
+          <a id={"list-item-" + item.id + "-reset"}
+            className={item.status == "complete" ? "" : "hidden"}
+            onClick={() => this.handleClickResetListItem(item)}>
+
+              <span className="glyphicon glyphicon-repeat"></span>
+          </a>
+
+          &nbsp;
+
+          <a id={"list-item-" + item.id + "-complete"}
+            className={item.status == "complete" ? "hidden" : ""}
+            onClick={() => this.handleClickCompleteListItem(item)}>
+
+              <span className="glyphicon glyphicon-ok"></span>
+          </a>
+
+          &nbsp;
+
           <a onClick={() => this.handleClickDeleteListItem(item)}>
             <span className="glyphicon glyphicon-remove-circle"></span>
           </a>
