@@ -59,6 +59,18 @@ var ListsContainer = React.createClass({
     this.setState({lists: this.state.lists.concat([newList])});
   },
 
+  listCountString(count) {
+    if (count <= 0) {
+      return "You don't have any lists yet.";
+
+    } else if (count == 1) {
+      return "You have one list.";
+
+    } else {
+      return "You have " + count + " lists.";
+    }
+  },
+
   render() {
     var lists = this.state.lists.map((list, listIndex) => {
       return (
@@ -77,7 +89,7 @@ var ListsContainer = React.createClass({
 
     return (
       <div>
-        <p>You have {this.state.lists.length} lists.</p>
+        <p>{this.listCountString(this.state.lists.length)}</p>
         <NewListForm addList={this.addList} />
         {lists}
       </div>

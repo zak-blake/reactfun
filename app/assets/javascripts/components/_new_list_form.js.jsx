@@ -1,6 +1,6 @@
 var NewListForm = React.createClass({
   getInitialState: function() {
-    return {name: ''};
+    return {name: '', hidden: true};
   },
   handleNameChange: function(e) {
     this.setState({ name: e.target.value });
@@ -17,7 +17,7 @@ var NewListForm = React.createClass({
       data: {list: {name: this.state.name}},
       context: this,
       success: function(data) {
-        this.setState({name: ''})
+        this.setState({name: '', hidden: true})
         this.props.addList(data);
       },
       error: function(data) {
@@ -26,22 +26,47 @@ var NewListForm = React.createClass({
     });
   },
 
+  handleClickShow: function(event) {
+    this.setState({hidden: false});
+  },
+
+  handleClickHide: function(event) {
+    event.preventDefault();
+    this.setState({hidden: true});
+  },
+
   render() {
-    return (
-      <form onSubmit={this.handleSubmit} id="new-list-form">
-
-        <div className="form-group">
-          <label htmlFor="new-list-name">New list</label>
-          <input type="text"
-            placeholder="Name"
-            value={ this.state.name }
-            onChange={ this.handleNameChange }
-            id="new-list-name"
-            className="form-control" />
+    if (this.state.hidden) {
+      return (
+        <div>
+          <button onClick={this.handleClickShow} className="btn btn-success">
+            Add list
+          </button>
         </div>
+      );
+    } else {
+      return (
+        <form onSubmit={this.handleSubmit} id="new-list-form">
 
-        <input type="submit" value="Create" className="btn btn-primary" />
-      </form>
-    );
+          <div className="input-group">
+
+            <input type="text"
+              placeholder="Name"
+              value={ this.state.name }
+              onChange={ this.handleNameChange }
+              id="new-list-name"
+              className="form-control" />
+
+            <span className="input-group-btn">
+              <input type="submit" value="Create" className="btn btn-success" />
+
+              <button onClick={this.handleClickHide} className="btn btn-default" >
+                <span className="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+              </button>
+            </span>
+          </div>
+        </form>
+      );
+    }
   }
 });
