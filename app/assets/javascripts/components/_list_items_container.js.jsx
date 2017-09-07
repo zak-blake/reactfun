@@ -139,10 +139,10 @@ var ListItemsContainer = React.createClass({
     return (
       <div>
         <div className="list-content">
+          {addListItem}
           <ul>
             {listItems}
           </ul>
-          {addListItem}
         </div>
 
         <div className={this.getListCompletionClass()}></div>
