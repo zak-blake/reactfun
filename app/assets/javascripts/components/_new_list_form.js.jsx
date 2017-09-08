@@ -62,7 +62,7 @@ var NewListForm = React.createClass({
               <input type="submit" value="Create" className="btn btn-success" />
 
               <button onClick={this.handleClickHide} className="btn btn-default" >
-                <span className="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+                <span className="glyphicon glyphicon-remove-circle" aria-hidden="true" />
               </button>
             </span>
           </div>

@@ -88,7 +88,7 @@ var ListsContainer = React.createClass({
     });
 
     return (
-      <div>
+      <div className="lists-container">
         <p>{this.listCountString(this.state.lists.length)}</p>
         <NewListForm addList={this.addList} />
         {lists}

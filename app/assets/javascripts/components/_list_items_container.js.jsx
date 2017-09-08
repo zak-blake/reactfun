@@ -1,6 +1,6 @@
 var ListItemsContainer = React.createClass({
   getInitialState() {
-    return { listItems: [], count: 0, completeCount: 0 };
+    return { listItems: [], count: 0, completeCount: 0, expandedItemId: null };
   },
   componentDidMount() {
     this.fetchListItems();
@@ -22,6 +22,10 @@ var ListItemsContainer = React.createClass({
       listItems: this.state.listItems.concat([listItem]),
       count: this.state.count + 1
     });
+  },
+
+  setItemExpanded(item) {
+    this.s
   },
 
   handleClickAddListItem() {
@@ -124,25 +128,32 @@ var ListItemsContainer = React.createClass({
       );
     }
 
-    listItems = this.state.listItems.map((item) => {
-      return (
-        <ListItem
-          key={item.id}
-          item={item}
-          resetListItem={this.resetListItem}
-          completeListItem={this.completeListItem}
-          deleteListItem={this.deleteListItem}
-        />
-      );
-    });
+    listItems = null;
+
+    if (this.state.listItems.length > 0) {
+      listItems = this.state.listItems.map((item) => {
+        return (
+          <ListItem
+            key={item.id}
+            item={item}
+            resetListItem={this.resetListItem}
+            completeListItem={this.completeListItem}
+            deleteListItem={this.deleteListItem}
+          />
+        );
+      });
+    } else {
+      listItems = <p className="text-center">No list items</p>;
+    }
 
     return (
       <div>
-        <div className="list-content">
+        <div className="list-item-list">
+          {listItems}
+        </div>
+
+        <div className="list-item-list-actions">
           {addListItem}
-          <ul>
-            {listItems}
-          </ul>
         </div>
 
         <div className={this.getListCompletionClass()}></div>

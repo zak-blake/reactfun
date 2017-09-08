@@ -1,14 +1,20 @@
-.list-container {
-  background-color: white;
+.lists-container {
+  > p {
+    color: $very-light-slate;
+  }
+}
+
+.list-wrapper {
+  background-color: $very-light-slate;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   border-radius: 4px;
   margin: .8em;
   padding: 0;
 
   > h4 {
-    margin: 0 0 .3em 0;
-    padding: .4em;
-    background-color: $heavier-blue;
+    margin: 0;
+    padding: .2em .4em;
+    background-color: $dark-slate;
     color: white;
     border-radius: 4px 4px 0 0;
 
@@ -21,34 +27,74 @@
     }
   }
 
-  .list-content {
-    margin: 0;
-    padding: 0 .8em .8em .8em;
+  .list-item-list-actions {
+    padding: 1em;
+  }
 
-    > ul > li {
-      font-size: 1.5em;
+  .list-item-list {
+    margin: 0;
+    padding: .8em 0 0 0;
+
+    > div.list-item {
+      padding: 0 .8em;
+      height: 1.7em;
+      font-size: 1.7em;
+      border-bottom: 1px solid darken($very-light-slate, 10%);
+
+      &:last-child {
+        border: none;
+      }
 
       &.complete {
-        color: green;
+        color: darken($success-green, 10%);
+
+        > div.list-item-actions > a.reset {
+          color: $success-green;
+        }
       }
 
-      > a {
-        visibility: hidden;
-        opacity: 0;
-        transition: visibility 0s, opacity 0.5s linear;
+      > div.list-item-actions {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+
+        > a {
+          display: inline-block;
+          color: $slate-green;
+          font-size: 1.2em;
+          height: 100%;
+
+          > div.list-item-action {
+            min-width: 1.4em;
+            height: 100%;
+            padding-top: .1em;
+            text-align: center;
+          }
+
+          &.complete :hover {
+            color: $success-green;
+            opacity: .75;
+          }
+
+          &.delete :hover {
+            color: $warn-orange;
+          }
+
+          &.reset :hover {
+            color: $slate-green;
+          }
+        }
       }
 
-      &:hover > a {
-        visibility: visible;
-        opacity: 1;
+      &:hover {
+        background-color: darken($very-light-slate, 5%);
       }
     }
   }
-
 }
 
 #new-list-form {
-  background-color: white;
+  background-color: $dark-slate;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   padding: 1em;
   border-radius: 4px;
@@ -66,7 +112,7 @@
 .completion {
   z-index: 1;
   height: .5em;
-  background-color: $light-green;
+  background-color: $slate-green;
   border-radius: 4px;
 }
 

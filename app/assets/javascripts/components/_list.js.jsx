@@ -24,7 +24,7 @@ var List = React.createClass({
     editButtonClass = this.props.editableTitle ? "hidden" : "" ;
 
     return (
-      <div className="list-container">
+      <div className="list-wrapper">
         <h4>
           {title}
 

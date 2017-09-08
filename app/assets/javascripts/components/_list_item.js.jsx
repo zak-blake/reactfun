@@ -19,35 +19,54 @@ var ListItem = React.createClass({
     this.props.deleteListItem(this.props.item);
   },
 
+  resetActionClassName() {
+    return [
+      this.props.item.status == "complete" ? "" : "hidden",
+      "reset"
+    ].join(" ");
+  },
+  completeActionClassName() {
+    return [
+      this.props.item.status == "complete" ? "hidden" : "",
+      "complete"
+    ].join(" ");
+  },
+
   render() {
     return (
-      <li id={this.itemIdString()} className={this.props.item.status}>
+      <div id={this.itemIdString()} className={"list-item " + this.props.item.status}>
+
         {this.props.item.name}
 
-        &nbsp;
+        <div className="list-item-actions pull-right">
+          <a href="#"
+            id={this.itemIdString() + "-reset"}
+            className={this.resetActionClassName()}
+            onClick={this.handleClickResetListItem}>
 
-        <a id={this.itemIdString() + "-reset"}
-          className={this.props.item.status == "complete" ? "" : "hidden"}
-          onClick={this.handleClickResetListItem}>
+              <div className="list-item-action">
+                <span className="glyphicon glyphicon-ok" />
+              </div>
+          </a>
 
-            <span className="glyphicon glyphicon-repeat"></span>
-        </a>
+          <a href="#"
+            id={this.itemIdString() + "-complete"}
+            className={this.completeActionClassName()}
+            onClick={this.handleClickCompleteListItem}>
 
-        &nbsp;
+            <div className="list-item-action">
+              <span className="glyphicon glyphicon-ok" />
+            </div>
+          </a>
 
-        <a id={this.itemIdString() + "-complete"}
-          className={this.props.item.status == "complete" ? "hidden" : ""}
-          onClick={this.handleClickCompleteListItem}>
+          <a href="#" onClick={this.handleClickDeleteListItem} className={"delete"}>
 
-            <span className="glyphicon glyphicon-ok"></span>
-        </a>
-
-        &nbsp;
-
-        <a onClick={this.handleClickDeleteListItem}>
-          <span className="glyphicon glyphicon-remove-circle"></span>
-        </a>
-      </li>
+            <div className="list-item-action">
+              <span className="glyphicon glyphicon-remove-circle" />
+            </div>
+          </a>
+        </div>
+      </div>
     );
   }
 });
