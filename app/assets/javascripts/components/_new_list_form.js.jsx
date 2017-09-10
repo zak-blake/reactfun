@@ -52,7 +52,7 @@ var NewListForm = React.createClass({
           <div className="input-group">
 
             <input type="text"
-              placeholder="Name"
+              placeholder="New List Name"
               value={ this.state.name }
               onChange={ this.handleNameChange }
               id="new-list-name"

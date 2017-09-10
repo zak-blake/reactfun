@@ -61,7 +61,7 @@ var ListsContainer = React.createClass({
 
   listCountString(count) {
     if (count <= 0) {
-      return "You don't have any lists yet.";
+      return "You don't have any lists.";
 
     } else if (count == 1) {
       return "You have one list.";
