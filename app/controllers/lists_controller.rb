@@ -1,5 +1,5 @@
 class ListsController < ApplicationController
-  before_action :set_list, only: [:show, :edit, :update, :destroy]
+  before_action :set_user_workspace_list, only: [:show, :edit, :update, :destroy]
 
   # GET /lists
   # GET /lists.json
@@ -25,13 +25,13 @@ class ListsController < ApplicationController
   # POST /lists.json
   def create
     @list = List.new(list_params)
-
-    @list.user = current_user
+    workspace = current_user.workspaces.find(params[:workspace_id])
+    @list.workspace = workspace
 
     respond_to do |format|
       if @list.save
         format.html { redirect_to @list, notice: 'List was successfully created.' }
-        format.json { render :show, status: :created, location: @list }
+        format.json { render :show, status: :created, location: full_list_path(@list) }
       else
         format.html { render :new }
         format.json { render json: @list.errors, status: :unprocessable_entity }
@@ -45,7 +45,7 @@ class ListsController < ApplicationController
     respond_to do |format|
       if @list.update(list_params)
         format.html { redirect_to @list, notice: 'List was successfully updated.' }
-        format.json { render :show, status: :ok, location: @list }
+        format.json { render :show, status: :ok, location: full_list_path(@list) }
       else
         format.html { render :edit }
         format.json { render json: @list.errors, status: :unprocessable_entity }
@@ -65,8 +65,14 @@ class ListsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_list
-      @list = List.find(params[:id])
+    def set_user_workspace_list
+      @user = User.find_by_id(params[:user_id])
+      @workspace = @user.workspaces.find_by_id(params[:workspace_id])
+      @list = @workspace.lists.find_by_id(params[:id])
+    end
+
+    def full_list_path(list)
+      user_workspace_lists_path(list.workspace.user, list.workspace, list)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

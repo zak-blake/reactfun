@@ -6,16 +6,20 @@ var ListsContainer = React.createClass({
     this.fetchLists();
   },
 
+  path() {
+    return this.props.path + "/lists";
+  },
+
   fetchLists() {
     $.getJSON(
-      this.props.listsPath,
+      this.path(),
       (data) => this.setState({lists: data})
     );
   },
 
   deleteList(id) {
     $.ajax({
-      url: `/lists/${id}`,
+      url: this.path() + "/" + id,
       dataType: 'json',
       type: 'DELETE',
       context: this,
@@ -61,13 +65,13 @@ var ListsContainer = React.createClass({
 
   listCountString(count) {
     if (count <= 0) {
-      return "You don't have any lists.";
+      return "No lists in this workspace.";
 
     } else if (count == 1) {
-      return "You have one list.";
+      return "One list in this workspace.";
 
     } else {
-      return "You have " + count + " lists.";
+      return count + " lists in this workspace.";
     }
   },
 
@@ -76,6 +80,7 @@ var ListsContainer = React.createClass({
       return (
         <List
           key={list.id}
+          path={this.path() + "/" + list.id}
           list={list}
           deleteList={this.deleteList}
           setListEditable={this.setListEditable}
@@ -90,7 +95,9 @@ var ListsContainer = React.createClass({
     return (
       <div className="lists-container">
         <p>{this.listCountString(this.state.lists.length)}</p>
-        <NewListForm addList={this.addList} />
+
+        <NewListForm addList={this.addList} path={this.path()} />
+
         {lists}
       </div>
     );

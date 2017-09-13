@@ -11,10 +11,10 @@ var NewListItemForm = React.createClass({
     var name = this.state.name.trim();
 
     $.ajax({
-      url: '/list_items',
+      url: this.props.path,
       dataType: 'json',
       type: 'POST',
-      data: {list_item: {name: this.state.name, list_id: this.props.listId}},
+      data: {list_item: {name: this.state.name}},
       context: this,
       success: function(data) {
         this.setState({name: ''})

@@ -1,10 +1,10 @@
 class ListItemsController < ApplicationController
-  before_action :set_list_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_user_workspace_list, only: [:show, :edit, :update, :destroy]
 
   # GET /list_items
   # GET /list_items.json
   def index
-    list = List.find(params[:id])
+    list = List.find(params[:list_id])
 
     unless list.workspace.user == current_user
       return render json: {}, status: 401
@@ -31,14 +31,19 @@ class ListItemsController < ApplicationController
   # POST /list_items
   # POST /list_items.json
   def create
-    @list_item = ListItem.new(list_item_params)
+    updated_list_item_params = list_item_params
+    updated_list_item_params["list_id"] = params[:list_id]
+
+    @list_item = ListItem.new(updated_list_item_params)
 
     respond_to do |format|
       if @list_item.save
         format.html { redirect_to @list_item, notice: 'List item was successfully created.' }
-        format.json { render :show, status: :created, location: @list_item }
+        format.json { render :show, status: :created,
+          location: full_list_item_path(@list_item) }
       else
         format.html { render :new }
+        puts @list_item.errors.full_messages
         format.json { render json: @list_item.errors, status: :unprocessable_entity }
       end
     end
@@ -50,7 +55,8 @@ class ListItemsController < ApplicationController
     respond_to do |format|
       if @list_item.update(list_item_params)
         format.html { redirect_to @list_item, notice: 'List item was successfully updated.' }
-        format.json { render :show, status: :ok, location: @list_item }
+        format.json { render :show, status: :ok,
+          location: full_list_item_path(@list_item) }
       else
         format.html { render :edit }
         format.json { render json: @list_item.errors, status: :unprocessable_entity }
@@ -70,8 +76,16 @@ class ListItemsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_list_item
-      @list_item = current_user.list_items.find(params[:id])
+    def set_user_workspace_list
+      @user = User.find_by_id(params[:user_id])
+      @workspace = @user.workspaces.find_by_id(params[:workspace_id])
+      @list = @workspace.lists.find_by_id(params[:list_id])
+      @list_item = @list.list_items.find_by_id(params[:id])
+    end
+
+    def full_list_item_path(item)
+      user_workspace_list_list_item_path(
+        item.list.workspace.user, item.list.workspace, item.list, item)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

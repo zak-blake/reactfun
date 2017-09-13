@@ -8,7 +8,7 @@ var ListItemsContainer = React.createClass({
 
   fetchListItems() {
     $.getJSON(
-      '/lists/' + this.props.listId + '/items',
+      this.props.path,
       (data) => this.setState({
         listItems: data["list_items"],
         count: data["list_items_count"],
@@ -34,7 +34,7 @@ var ListItemsContainer = React.createClass({
 
   deleteListItem(deletedListItem) {
     $.ajax({
-      url: `/list_items/${deletedListItem.id}`,
+      url: this.props.path + "/" + deletedListItem.id,
       dataType: 'json',
       type: 'DELETE',
       context: this,
@@ -59,7 +59,7 @@ var ListItemsContainer = React.createClass({
 
   completeListItem(item) {
     $.ajax({
-      url: `/list_items/${item.id}`,
+      url: this.props.path + `/${item.id}`,
       data: { list_item: { status: 'complete' } },
       dataType: 'json',
       type: 'PATCH',
@@ -115,6 +115,7 @@ var ListItemsContainer = React.createClass({
     if(this.props.itemAddable) {
       addListItem = (
         <NewListItemForm
+          path={this.props.path}
           listId={this.props.listId}
           closeAddItemForm={this.closeAddItemForm}
           addListItem={this.addListItem} />

@@ -19,7 +19,7 @@ var NewListTitleForm = React.createClass({
     var name = this.state.name.trim();
 
     $.ajax({
-      url: '/lists/' + this.props.list.id,
+      url: this.props.path,
       dataType: 'json',
       type: 'PUT',
       data: {list: {name: this.state.name}},

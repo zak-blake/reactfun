@@ -8,7 +8,7 @@ var Workspace = React.createClass({
 
   fetchWorkspace() {
     $.getJSON(
-      "/workspaces/" + this.props.workspaceId,
+      this.props.path,
       (data) => this.setState({ workspace: data })
     );
   },
@@ -17,8 +17,7 @@ var Workspace = React.createClass({
     var listsContainer = null;
 
     if (this.state.workspace.id != null) {
-      listsContainer = (<ListsContainer
-        listsPath={"/workspaces/" + this.state.workspace.id + "/lists"} />);
+      listsContainer = <ListsContainer path={this.props.path} />;
     }
 
     return (

@@ -5,9 +5,12 @@ var WorkspacesContainer = React.createClass({
   componentDidMount() {
     this.fetchWorkspaces();
   },
+
+  path() { return "users/" + this.props.userId + "/workspaces"; },
+
   fetchWorkspaces() {
     $.getJSON(
-      "/workspaces",
+      this.path(),
       (data) => this.setState({
         workspaces: data,
         activeWorkspaceId: data[0].id
@@ -21,8 +24,9 @@ var WorkspacesContainer = React.createClass({
     });
 
     activeWorkspace = (this.state.activeWorkspaceId != null) ?
-      <Workspace workspaceId={this.state.activeWorkspaceId} /> : null
-      
+      <Workspace
+        path={this.path() + "/" + this.state.activeWorkspaceId } /> : null
+
     return (
       <div id="workspace-list">
         {workspaceList}

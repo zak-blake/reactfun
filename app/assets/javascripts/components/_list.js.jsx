@@ -15,6 +15,7 @@ var List = React.createClass({
     if(this.props.editableTitle) {
       title = <NewListTitleForm
         list={this.props.list}
+        path={this.props.path}
         replaceAllInstancesOfList={this.props.replaceAllInstancesOfList}
       />;
     } else {
@@ -41,6 +42,7 @@ var List = React.createClass({
 
         <ListItemsContainer
           listId={this.props.list.id}
+          path={this.props.path + "/list_items"}
           itemAddable={this.props.itemAddable}
           setListItemAddable={this.props.setListItemAddable} />
       </div>

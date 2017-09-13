@@ -11,7 +11,7 @@ var NewListForm = React.createClass({
     var name = this.state.name.trim();
 
     $.ajax({
-      url: '/lists',
+      url: this.props.path,
       dataType: 'json',
       type: 'POST',
       data: {list: {name: this.state.name}},
