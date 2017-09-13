@@ -4,7 +4,12 @@ class ListItemsController < ApplicationController
   # GET /list_items
   # GET /list_items.json
   def index
-    list = current_user.lists.find(params[:id])
+    list = List.find(params[:id])
+
+    unless list.workspace.user == current_user
+      return render json: {}, status: 401
+    end
+
     @list_items = list.list_items
     @complete_count = @list_items.complete.length
   end
