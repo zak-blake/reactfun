@@ -79,7 +79,7 @@ var ListItemsContainer = React.createClass({
 
   resetListItem(item) {
     $.ajax({
-      url: `/list_items/${item.id}`,
+      url: this.props.path + `/${item.id}`,
       data: { list_item: { status: 'incomplete' } },
       dataType: 'json',
       type: 'PATCH',

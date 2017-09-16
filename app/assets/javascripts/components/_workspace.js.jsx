@@ -5,6 +5,10 @@ var Workspace = React.createClass({
   componentDidMount() {
     this.fetchWorkspace();
   },
+  componentWillReceiveProps(newProps) {
+    this.props = newProps;
+    this.fetchWorkspace();
+  },
 
   fetchWorkspace() {
     $.getJSON(
@@ -22,7 +26,6 @@ var Workspace = React.createClass({
 
     return (
       <div>
-        <h2>{this.state.workspace.name}</h2>
         {listsContainer}
       </div>
     );

@@ -4,7 +4,8 @@ class ListsController < ApplicationController
   # GET /lists
   # GET /lists.json
   def index
-    @lists = current_user.workspaces.first&.lists
+    @lists = current_user.workspaces
+      .find_by_id(params[:workspace_id])&.lists || Workspace.none
   end
 
   # GET /lists/1

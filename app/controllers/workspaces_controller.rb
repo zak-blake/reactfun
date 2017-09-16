@@ -26,11 +26,14 @@ class WorkspacesController < ApplicationController
   # POST /workspaces.json
   def create
     @workspace = Workspace.new(workspace_params)
-
+    @user = User.find(params[:user_id])
     respond_to do |format|
+      @workspace.user = @user
+
       if @workspace.save
         format.html { redirect_to @workspace, notice: 'Workspace was successfully created.' }
-        format.json { render :show, status: :created, location: @workspace }
+        format.json { render :show, status: :created,
+          location: user_workspace_path(@user, @workspace) }
       else
         format.html { render :new }
         format.json { render json: @workspace.errors, status: :unprocessable_entity }
@@ -44,7 +47,8 @@ class WorkspacesController < ApplicationController
     respond_to do |format|
       if @workspace.update(workspace_params)
         format.html { redirect_to @workspace, notice: 'Workspace was successfully updated.' }
-        format.json { render :show, status: :ok, location: @workspace }
+        format.json { render :show, status: :ok,
+          location: user_workspace_path(@workspace.user, @workpace) }
       else
         format.html { render :edit }
         format.json { render json: @workspace.errors, status: :unprocessable_entity }

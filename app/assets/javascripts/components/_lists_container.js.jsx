@@ -5,6 +5,11 @@ var ListsContainer = React.createClass({
   componentDidMount() {
     this.fetchLists();
   },
+  componentWillReceiveProps(newProps) {
+    this.props = newProps;
+    this.setState({editTitleListId: null, addListItemListId: null});
+    this.fetchLists();
+  },
 
   path() {
     return this.props.path + "/lists";

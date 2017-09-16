@@ -121,3 +121,50 @@
     width: percentage($i/100);
   }
 }
+
+#workspace-list {
+  background-color: $very-light-slate;
+  border-radius: 4px;
+  padding: .4em;
+  margin-bottom: 1em;
+  > a {
+    text-decoration: none;
+
+    > div {
+      cursor: pointer;
+      color: $dark-slate;
+      padding: 1em;
+      border-radius: 4px;
+      display: inline-block;
+
+      &.current {
+        cursor: default;
+        background-color: $dark-slate;
+        color: white;
+      }
+
+      &:hover:not(.current) {
+        background-color: darken($very-light-slate, 10%);
+      }
+    }
+  }
+
+  #new-workspace {
+    display: inline-block;
+    border-radius: 4px;
+    padding: .6em 1em;
+    margin: .4em;
+    background-color: darken($very-light-slate, 20%);
+    color: white;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $slate;
+    }
+  }
+
+  #no-workspaces {
+    display: inline-block;
+    color: slate;
+  }
+}
