@@ -26,7 +26,6 @@ var WorkspacesContainer = React.createClass({
   },
 
   handleClickNewWorkspace: function() {
-    console.log("new Workspace");
     $.ajax({
       url: this.path(),
       data: { workspace: { name: ""} },

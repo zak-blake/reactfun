@@ -2,6 +2,9 @@ var NewListForm = React.createClass({
   getInitialState: function() {
     return {name: '', hidden: true};
   },
+  componentWillReceiveProps() {
+    this.setState({hidden: true});
+  },
   handleNameChange: function(e) {
     this.setState({ name: e.target.value });
   },

@@ -134,6 +134,7 @@
       cursor: pointer;
       color: $dark-slate;
       padding: 1em;
+      margin: .2em;
       border-radius: 4px;
       display: inline-block;
 
@@ -153,7 +154,7 @@
     display: inline-block;
     border-radius: 4px;
     padding: .6em 1em;
-    margin: .4em;
+    margin: .2em;
     background-color: darken($very-light-slate, 20%);
     color: white;
     cursor: pointer;
