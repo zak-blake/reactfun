@@ -48,7 +48,7 @@ class WorkspacesController < ApplicationController
       if @workspace.update(workspace_params)
         format.html { redirect_to @workspace, notice: 'Workspace was successfully updated.' }
         format.json { render :show, status: :ok,
-          location: user_workspace_path(@workspace.user, @workpace) }
+          location: user_workspace_path(@workspace.user, @workspace) }
       else
         format.html { render :edit }
         format.json { render json: @workspace.errors, status: :unprocessable_entity }

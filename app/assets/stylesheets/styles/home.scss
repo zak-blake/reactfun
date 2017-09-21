@@ -8,12 +8,12 @@
   background-color: $very-light-slate;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   border-radius: 4px;
-  margin: .8em;
+  margin: .8em 0;
   padding: 0;
 
   > h4 {
     margin: 0;
-    padding: .2em .4em;
+    padding: .4em;
     background-color: $dark-slate;
     color: white;
     border-radius: 4px 4px 0 0;
@@ -93,7 +93,8 @@
   }
 }
 
-#new-list-form {
+#new-list-form, #workspace-title-form
+{
   background-color: $dark-slate;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   padding: 1em;
@@ -126,7 +127,6 @@
   background-color: $very-light-slate;
   border-radius: 4px;
   padding: .4em;
-  margin-bottom: 1em;
   > a {
     text-decoration: none;
 
@@ -168,4 +168,12 @@
     display: inline-block;
     color: slate;
   }
+}
+
+#workspace-wrapper {
+  border: 2px solid darken($slate, 5%);
+  border-top: none;
+  padding: .6em .8em .6em .8em;
+  margin: 0 .4em;
+  border-radius: 0 0 4px 4px;
 }

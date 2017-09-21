@@ -3,6 +3,7 @@ $light-grey: #ccc;
 $comfy-blue: #77B1C6;
 
 $slate: #587272;
+$light-slate: lighten($slate, 40%);
 $dark-slate: darken($slate, 15%);
 $very-light-slate: lighten($slate, 50%);
 

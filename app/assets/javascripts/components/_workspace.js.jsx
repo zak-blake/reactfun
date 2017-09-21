@@ -17,6 +17,18 @@ var Workspace = React.createClass({
     );
   },
 
+  replaceWorkspace(workspace) {
+    if (this.state.workspace.id) {
+      this.props.replaceWorkspace(workspace);
+    }
+  },
+
+  deleteWorkspace() {
+    if (this.state.workspace.id) {
+      this.props.deleteWorkspace(this.state.workspace.id);
+    }
+  },
+
   render() {
     var listsContainer = null;
 
@@ -24,8 +36,17 @@ var Workspace = React.createClass({
       listsContainer = <ListsContainer path={this.props.path} />;
     }
 
+    var replaceWorkspaceForm = (
+      <WorkspaceSettings
+        path={this.props.path}
+        initialName={this.state.workspace.name}
+        replaceWorkspace={this.replaceWorkspace}
+        deleteWorkspace={this.deleteWorkspace}/>
+    );
+
     return (
-      <div>
+      <div id="workspace-wrapper">
+        {replaceWorkspaceForm}
         {listsContainer}
       </div>
     );

@@ -42,7 +42,7 @@ var NewListForm = React.createClass({
     if (this.state.hidden) {
       return (
         <div>
-          <button onClick={this.handleClickShow} className="btn btn-success">
+          <button onClick={this.handleClickShow} className="btn btn-sm btn-success">
             <span className="glyphicon glyphicon-plus"></span>&nbsp;
             List
           </button>

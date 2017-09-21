@@ -7,7 +7,7 @@ class Workspace < ApplicationRecord
 
   before_validation do
     if name.blank?
-      self.name = "Workspace #{self.user.workspaces.count + 1}"
+      self.name = "New Workspace"
     end
   end
 end

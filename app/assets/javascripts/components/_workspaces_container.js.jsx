@@ -7,6 +7,7 @@ var WorkspacesContainer = React.createClass({
   },
 
   path() { return "users/" + this.props.userId + "/workspaces"; },
+
   activeWorkspacePath() {
     return this.path() + "/" + this.state.activeWorkspaceId;
   },
@@ -23,6 +24,37 @@ var WorkspacesContainer = React.createClass({
         activeWorkspaceId: data.length > 0 ? data[0].id : null
       })
     );
+  },
+
+  replaceWorkspace(newWorkspace) {
+    var newWorkspaceList = this.state.workspaces.map((workspace) => {
+      return (workspace.id == newWorkspace.id) ? newWorkspace : workspace;
+    });
+
+    this.setState({workspaces: newWorkspaceList});
+  },
+
+  deleteWorkspace: function(id) {
+    $.ajax({
+      url: this.path() + "/" + id,
+      dataType: 'json',
+      type: 'DELETE',
+      context: this,
+      success(response) {
+
+        this.setState(state => {
+          var newWorkspaces = this.state.workspaces.filter((workspace) => {
+            return workspace.id != id;
+          });
+
+          return {
+            workspaces: newWorkspaces,
+            activeWorkspaceId: newWorkspaces.length > 0 ?
+              newWorkspaces[0].id : null
+          };
+        });
+      }
+    });
   },
 
   handleClickNewWorkspace: function() {
@@ -55,7 +87,10 @@ var WorkspacesContainer = React.createClass({
     });
 
     activeWorkspace = (this.state.activeWorkspaceId != null) ?
-      <Workspace path={this.activeWorkspacePath()} /> : null;
+      <Workspace
+        path={this.activeWorkspacePath()}
+        replaceWorkspace={this.replaceWorkspace}
+        deleteWorkspace={this.deleteWorkspace} /> : null;
 
     newWorkspaceLink = (
       <a onClick={() => this.handleClickNewWorkspace()} id={"new-workspace"}>
