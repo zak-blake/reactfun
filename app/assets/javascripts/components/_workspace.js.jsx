@@ -37,7 +37,7 @@ var Workspace = React.createClass({
     }
 
     var replaceWorkspaceForm = (
-      <WorkspaceSettings
+      <WorkspaceHeader
         path={this.props.path}
         initialName={this.state.workspace.name}
         replaceWorkspace={this.replaceWorkspace}

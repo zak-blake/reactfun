@@ -8,7 +8,7 @@
   background-color: $very-light-slate;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   border-radius: 4px;
-  margin: .8em 0;
+  margin: .4em 0;
   padding: 0;
 
   > h4 {
@@ -97,10 +97,8 @@
 {
   background-color: $dark-slate;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  padding: 1em;
+  padding: .6em 1em;
   border-radius: 4px;
-  display: inline-block;
-  margin-left: .8em;
   max-width: 28em;
 }
 
@@ -133,7 +131,7 @@
     > div {
       cursor: pointer;
       color: $dark-slate;
-      padding: 1em;
+      padding: .5em;
       margin: .2em;
       border-radius: 4px;
       display: inline-block;
@@ -153,11 +151,12 @@
   #new-workspace {
     display: inline-block;
     border-radius: 4px;
-    padding: .6em 1em;
-    margin: .2em;
+    padding: .3em .6em;
     background-color: darken($very-light-slate, 20%);
     color: white;
     cursor: pointer;
+    height: 100%;
+    margin: 0 .4em;
 
     &:hover {
       background-color: $slate;
@@ -167,6 +166,7 @@
   #no-workspaces {
     display: inline-block;
     color: slate;
+    margin: 0;
   }
 }
 
@@ -176,4 +176,19 @@
   padding: .6em .8em .6em .8em;
   margin: 0 .4em;
   border-radius: 0 0 4px 4px;
+
+  div#workspace-header {
+    overflow: inherit;
+    min-height: 4em;
+    margin: 0 auto;
+
+    > h2 {
+      margin: 0;
+      text-align: center;
+    }
+
+    > form#workspace-title-form {
+      margin: 0 auto;
+    }
+  }
 }

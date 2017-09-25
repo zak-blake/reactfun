@@ -1,10 +1,14 @@
-var WorkspaceSettings = React.createClass({
+var WorkspaceHeader = React.createClass({
   getInitialState: function() {
-    return {initialName: this.props.name, name: '', editable: false};
+    return {initialName: this.props.initialName, name: '', editable: false};
+  },
+
+  componentWillReceiveProps(newProps) {
+    this.props = newProps;
+    this.setState({editable: false, initialName: newProps.initialName});
   },
 
   handleNameChange: function(event) {
-    console.log("name change");
     event.preventDefault();
     this.setState({ name: event.target.value, initialName: null });
   },
@@ -47,11 +51,11 @@ var WorkspaceSettings = React.createClass({
       if(this.state.initialName == null) {
         name = this.state.name;
       } else {
-        name = this.state.initialName;
+        name = this.props.initialName;
       }
 
-      return (
-        <form onSubmit={this.handleSubmit} id="workspace-title-form" className="pull-right">
+      var header = (
+        <form onSubmit={this.handleSubmit} id="workspace-title-form"  >
 
           <div className="input-group">
             <input type="text"
@@ -75,17 +79,26 @@ var WorkspaceSettings = React.createClass({
         </form>
       );
     } else {
-      return (
-        <div className="btn-group pull-right">
-          <button className="btn btn-sm btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Settings&nbsp; <span className="glyphicon glyphicon-triangle-bottom"></span>
-          </button>
-          <div className="dropdown-menu">
-            <li><a className="dropdown-item" href="#" onClick={this.handleClickRename}>Rename</a></li>
-            <li><a className="dropdown-item" href="#" onClick={this.handleClickDelete}>Delete</a></li>
+      var header = (
+        <h2>
+          {this.props.initialName}
+          &nbsp;
+          <div className="btn-group">
+            <button className="btn btn-xs btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              options &nbsp;
+              <span className="glyphicon glyphicon-triangle-bottom"></span>
+            </button>
+            <div className="dropdown-menu">
+              <li><a className="dropdown-item" href="#" onClick={this.handleClickRename}>Rename</a></li>
+              <li><a className="dropdown-item" href="#" onClick={this.handleClickDelete}>Delete</a></li>
+            </div>
           </div>
-        </div>
+        </h2>
       );
     }
+
+    return (
+      <div id="workspace-header">{header}</div>
+    );
   }
 });
