@@ -53,7 +53,10 @@
         }
       }
 
+
+
       > div.list-item-actions {
+        display: none;
         margin: 0;
         padding: 0;
         height: 100%;
@@ -84,6 +87,10 @@
             color: $slate-green;
           }
         }
+      }
+
+      &:hover > div.list-item-actions {
+        display: inherit;
       }
 
       &:hover {
@@ -185,6 +192,7 @@
     > h2 {
       margin: 0;
       text-align: center;
+      color: white;
     }
 
     > form#workspace-title-form {

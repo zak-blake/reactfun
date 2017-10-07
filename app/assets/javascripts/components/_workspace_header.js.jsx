@@ -84,8 +84,7 @@ var WorkspaceHeader = React.createClass({
           {this.props.initialName}
           &nbsp;
           <div className="btn-group">
-            <button className="btn btn-xs btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              options &nbsp;
+            <button className="btn btn-xs btn-tran dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <span className="glyphicon glyphicon-triangle-bottom"></span>
             </button>
             <div className="dropdown-menu">

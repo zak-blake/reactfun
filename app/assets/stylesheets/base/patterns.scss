@@ -1,0 +1,13 @@
+.btn-tran {
+  border-color: $very-light-slate;
+  background-color: transparent;
+  color: $very-light-slate;
+
+  &:hover {
+    color: white;
+  }
+
+  &:focus {
+    color: $very-light-slate;
+  }
+}

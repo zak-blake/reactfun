@@ -29,15 +29,15 @@ var List = React.createClass({
         <h4>
           {title}
 
-          <small className="pull-right">
-            <a onClick={this.handleClickEdit} className={editButtonClass}>
-              rename
-            </a>
-            &nbsp;
-            <a onClick={this.handleClickDelete} >
-              delete
-            </a>
-          </small>
+          <div className="btn-group pull-right">
+            <button className="btn btn-xs btn-tran dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span className="glyphicon glyphicon-triangle-bottom"></span>
+            </button>
+            <div className="dropdown-menu">
+              <li><a className="dropdown-item" href="#" onClick={this.handleClickEdit}>Rename</a></li>
+              <li><a className="dropdown-item" href="#" onClick={this.handleClickDelete}>Delete</a></li>
+            </div>
+          </div>
         </h4>
 
         <ListItemsContainer
