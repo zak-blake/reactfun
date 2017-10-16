@@ -2,6 +2,19 @@ var NewListItemForm = React.createClass({
   getInitialState: function() {
     return {name: ''};
   },
+
+  componentDidMount(){
+    document.addEventListener("keydown", this.escFunction, false);
+  },
+  componentWillUnmount(){
+    document.removeEventListener("keydown", this.escFunction, false);
+  },
+  escFunction(event){
+    if(event.keyCode === 27) {
+      this.props.closeAddItemForm();
+    }
+  },
+
   handleNameChange: function(e) {
     this.setState({ name: e.target.value });
   },
@@ -36,6 +49,7 @@ var NewListItemForm = React.createClass({
 
         <div className="input-group">
           <input type="text"
+            autoFocus value="true"
             placeholder="New item"
             value={ this.state.name }
             onChange={ this.handleNameChange }
@@ -49,8 +63,8 @@ var NewListItemForm = React.createClass({
               <span className="glyphicon glyphicon-ok" aria-hidden="true"></span>
             </button>
 
-            <button onClick={this.handleCancelNewItem} className="btn btn-default">
-              <span className="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+            <button onClick={this.handleCancelNewItem} className="btn btn-default btn-slate">
+              <span className="glyphicon glyphicon-remove" aria-hidden="true"></span>
             </button>
 
           </span>

@@ -1,6 +1,10 @@
 var WorkspacesContainer = React.createClass({
   getInitialState() {
-    return { workspaces: [], activeWorkspaceId: null };
+    return {
+      workspaces: [],
+      activeWorkspaceId: null,
+      editActiveWorkspaceTitle: false
+    };
   },
   componentDidMount() {
     this.fetchWorkspaces();
@@ -13,7 +17,7 @@ var WorkspacesContainer = React.createClass({
   },
 
   changeActiveWorkspace(id) {
-    this.setState({activeWorkspaceId: id});
+    this.setState({activeWorkspaceId: id, editActiveWorkspaceTitle: false});
   },
 
   fetchWorkspaces() {
@@ -21,7 +25,8 @@ var WorkspacesContainer = React.createClass({
       this.path(),
       (data) => this.setState({
         workspaces: data,
-        activeWorkspaceId: data.length > 0 ? data[0].id : null
+        activeWorkspaceId: data.length > 0 ? data[0].id : null,
+        loading: false
       })
     );
   },
@@ -67,7 +72,8 @@ var WorkspacesContainer = React.createClass({
       success(newWorkspace) {
         this.setState({
           workspaces: this.state.workspaces.concat(newWorkspace),
-          activeWorkspaceId: newWorkspace.id
+          activeWorkspaceId: newWorkspace.id,
+          editActiveWorkspaceTitle: true
         });
       }
     });
@@ -89,6 +95,7 @@ var WorkspacesContainer = React.createClass({
     activeWorkspace = (this.state.activeWorkspaceId != null) ?
       <Workspace
         path={this.activeWorkspacePath()}
+        editTitle={this.state.editActiveWorkspaceTitle}
         replaceWorkspace={this.replaceWorkspace}
         deleteWorkspace={this.deleteWorkspace} /> : null;
 

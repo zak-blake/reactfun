@@ -1,7 +1,7 @@
 .btn-tran {
-  border-color: $very-light-slate;
+  border-color: darken($very-light-slate, 30%);
   background-color: transparent;
-  color: $very-light-slate;
+  color: darken($very-light-slate, 30%);
 
   &:hover {
     color: white;
@@ -10,4 +10,59 @@
   &:focus {
     color: $very-light-slate;
   }
+}
+
+.btn-slate {
+  background-color: $very-light-slate;
+  color: $slate;
+  border-color: lighten($slate, 20%);
+
+  &:hover {
+    background-color: darken($very-light-slate, 3%);
+    color: darken($slate, 10%);
+    border-color: darken($slate, 5%);
+  }
+
+  &:focus {
+    background-color: darken($very-light-slate, 3%);
+    color: darken($slate, 10%);
+    border-color: darken($slate, 5%);
+  }
+}
+
+.btn-tran-gr {
+  border-color: lighten($success-green, 20%);
+  background-color: transparent;
+  color: lighten($success-green, 20%);
+
+  &:hover {
+    border-color: lighten($success-green, 30%);
+    color: lighten($success-green, 30%);
+  }
+
+  &:focus {
+    border-color: lighten($success-green, 30%);
+    color: lighten($success-green, 30%);
+  }
+}
+
+@keyframes spinner {
+  to {transform: rotate(360deg);}
+}
+
+.spinner:before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  margin-top: -10px;
+  margin-left: -10px;
+  border-radius: 50%;
+  border: 4px solid transparent;
+  border-top-color: $slate-green;
+  border-bottom-color: $slate-green;
+  animation: spinner 1.4s ease infinite;
 }

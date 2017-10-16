@@ -5,6 +5,19 @@ var NewListForm = React.createClass({
   componentWillReceiveProps() {
     this.setState({hidden: true});
   },
+
+  componentDidMount(){
+    document.addEventListener("keydown", this.escFunction, false);
+  },
+  componentWillUnmount(){
+    document.removeEventListener("keydown", this.escFunction, false);
+  },
+  escFunction(event){
+    if(event.keyCode === 27) {
+      this.setState({hidden: true});
+    }
+  },
+
   handleNameChange: function(e) {
     this.setState({ name: e.target.value });
   },
@@ -42,7 +55,7 @@ var NewListForm = React.createClass({
     if (this.state.hidden) {
       return (
         <div>
-          <button onClick={this.handleClickShow} className="btn btn-sm btn-success">
+          <button onClick={this.handleClickShow} className="btn btn-sm btn-tran-gr">
             List &nbsp;
             <span className="glyphicon glyphicon-plus"></span>
           </button>
@@ -55,6 +68,7 @@ var NewListForm = React.createClass({
           <div className="input-group">
 
             <input type="text"
+              autoFocus value="true"
               placeholder="New List Name"
               value={ this.state.name }
               onChange={ this.handleNameChange }
@@ -62,10 +76,10 @@ var NewListForm = React.createClass({
               className="form-control" />
 
             <span className="input-group-btn">
-              <input type="submit" value="Create" className="btn btn-success" />
+              <input type="submit" value="Add" className="btn btn-success" />
 
-              <button onClick={this.handleClickHide} className="btn btn-default" >
-                <span className="glyphicon glyphicon-remove-circle" aria-hidden="true" />
+              <button onClick={this.handleClickHide} className="btn btn-default btn-slate" >
+                <span className="glyphicon glyphicon-remove" aria-hidden="true" />
               </button>
             </span>
           </div>

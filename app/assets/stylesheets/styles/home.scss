@@ -1,100 +1,106 @@
 .lists-container {
+  overflow: hidden;
+
   > p {
     color: $very-light-slate;
   }
 }
 
-.list-wrapper {
-  background-color: $very-light-slate;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  border-radius: 4px;
-  margin: .4em 0;
-  padding: 0;
+div.list-wrapper {
+  padding: .2em;
 
-  > h4 {
-    margin: 0;
-    padding: .4em;
-    background-color: $dark-slate;
-    color: white;
-    border-radius: 4px 4px 0 0;
+  > div.list {
+    background-color: $very-light-slate;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    border-radius: 4px;
+    margin: .4em 0;
+    padding: 0;
 
-    > div.btn-group > button.btn {
+    > h4 {
       margin: 0;
-    }
-
-    > small > a {
+      padding: .4em;
+      background-color: $dark-slate;
       color: white;
-    }
-  }
+      border-radius: 4px 4px 0 0;
 
-  .list-item-list-actions {
-    padding: 1em;
-  }
-
-  .list-item-list {
-    margin: 0;
-    padding: .8em 0 0 0;
-
-    > div.list-item {
-      padding: 0 .8em;
-      height: 1.7em;
-      font-size: 1.7em;
-      border-bottom: 1px solid darken($very-light-slate, 10%);
-
-      &:last-child {
-        border: none;
-      }
-
-      &.complete {
-        color: darken($success-green, 10%);
-
-        > div.list-item-actions > a.reset {
-          color: $success-green;
-        }
-      }
-
-
-
-      > div.list-item-actions {
-        display: none;
+      > div.btn-group > button.btn {
         margin: 0;
-        padding: 0;
-        height: 100%;
+      }
 
-        > a {
-          display: inline-block;
-          color: $slate-green;
-          font-size: 1.2em;
+      > small > a {
+        color: white;
+      }
+    }
+
+    .list-item-list-actions {
+      padding: .6em;
+    }
+
+    .list-item-list {
+      margin: 0;
+      padding: .8em 0 0 0;
+
+      > div.list-item {
+        padding: 0 .5em;
+        height: 1.5em;
+        font-size: 1.5em;
+        border-bottom: 1px solid darken($very-light-slate, 10%);
+
+        &:last-child {
+          border: none;
+        }
+
+        &.complete {
+          text-decoration: line-through;
+          color: lighten($dark-slate, 30%);
+
+          > div.list-item-actions > a.reset {
+            color: $success-green;
+          }
+        }
+
+
+
+        > div.list-item-actions {
+          display: none;
+          margin: 0;
+          padding: 0;
           height: 100%;
 
-          > div.list-item-action {
-            min-width: 1.4em;
-            height: 100%;
-            padding-top: .1em;
-            text-align: center;
-          }
-
-          &.complete :hover {
-            color: $success-green;
-            opacity: .75;
-          }
-
-          &.delete :hover {
-            color: $warn-orange;
-          }
-
-          &.reset :hover {
+          > a {
+            display: inline-block;
             color: $slate-green;
+            font-size: 1.2em;
+            height: 100%;
+
+            > div.list-item-action {
+              min-width: 1.4em;
+              height: 100%;
+              text-align: center;
+            }
+
+            &.complete :hover {
+              color: $success-green;
+              opacity: .75;
+            }
+
+            &.delete :hover {
+              color: $warn-orange;
+            }
+
+            &.reset :hover {
+              color: $slate-green;
+            }
           }
         }
-      }
 
-      &:hover > div.list-item-actions {
-        display: inherit;
-      }
+        &:hover > div.list-item-actions {
+          display: inherit;
+        }
 
-      &:hover {
-        background-color: darken($very-light-slate, 5%);
+        &:hover {
+          background-color: darken($very-light-slate, 5%);
+        }
       }
     }
   }
@@ -109,8 +115,7 @@
   max-width: 28em;
 }
 
-#list-title-form,
-#new-list-item-form {
+#list-title-form {
   display: inline-block;
   max-width: 16em;
 }
@@ -180,7 +185,7 @@
 #workspace-wrapper {
   border: 2px solid darken($slate, 5%);
   border-top: none;
-  padding: .6em .8em .6em .8em;
+  padding: .6em .8em;
   margin: 0 .4em;
   border-radius: 0 0 4px 4px;
 

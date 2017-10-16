@@ -122,8 +122,7 @@ var ListItemsContainer = React.createClass({
       );
     }else{
       addListItem = (
-        <button onClick={this.handleClickAddListItem} className="btn btn-default">
-          Item &nbsp;
+        <button onClick={this.handleClickAddListItem} className="btn btn-default btn-sm btn-slate">
           <span className="glyphicon glyphicon-plus"></span>
         </button>
       );

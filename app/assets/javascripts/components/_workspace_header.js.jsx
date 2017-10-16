@@ -1,11 +1,23 @@
 var WorkspaceHeader = React.createClass({
   getInitialState: function() {
-    return {initialName: this.props.initialName, name: '', editable: false};
+    return {initialName: this.props.initialName, name: '', editable: this.props.editTitle};
+  },
+
+  componentDidMount(){
+    document.addEventListener("keydown", this.escFunction, false);
+  },
+  componentWillUnmount(){
+    document.removeEventListener("keydown", this.escFunction, false);
+  },
+  escFunction(event){
+    if(event.keyCode === 27) {
+      this.setState({editable: false});
+    }
   },
 
   componentWillReceiveProps(newProps) {
     this.props = newProps;
-    this.setState({editable: false, initialName: newProps.initialName});
+    this.setState({initialName: newProps.initialName, editable: newProps.editTitle });
   },
 
   handleNameChange: function(event) {
@@ -59,6 +71,7 @@ var WorkspaceHeader = React.createClass({
 
           <div className="input-group">
             <input type="text"
+              autoFocus value="true"
               placeholder="Workspace name"
               value={ name }
               onChange={ this.handleNameChange }
@@ -71,8 +84,8 @@ var WorkspaceHeader = React.createClass({
                 <span className="glyphicon glyphicon-ok" aria-hidden="true"></span>
               </button>
 
-              <button onClick={this.handleCancelUpdate} className="btn btn-default">
-                <span className="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+              <button onClick={this.handleCancelUpdate} className="btn btn-default btn-slate">
+                <span className="glyphicon glyphicon-remove" aria-hidden="true"></span>
               </button>
             </span>
           </div>

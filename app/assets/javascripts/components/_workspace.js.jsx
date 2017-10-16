@@ -1,11 +1,12 @@
 var Workspace = React.createClass({
   getInitialState() {
-    return { workspace: {name: "", id: null} };
+    return { workspace: {name: "", id: null}, loading: true };
   },
   componentDidMount() {
     this.fetchWorkspace();
   },
   componentWillReceiveProps(newProps) {
+    this.setState({loading: true});
     this.props = newProps;
     this.fetchWorkspace();
   },
@@ -13,7 +14,7 @@ var Workspace = React.createClass({
   fetchWorkspace() {
     $.getJSON(
       this.props.path,
-      (data) => this.setState({ workspace: data })
+      (data) => this.setState({ workspace: data, loading: false })
     );
   },
 
@@ -36,17 +37,22 @@ var Workspace = React.createClass({
       listsContainer = <ListsContainer path={this.props.path} />;
     }
 
-    var replaceWorkspaceForm = (
+    var workspaceHeader = (
       <WorkspaceHeader
         path={this.props.path}
         initialName={this.state.workspace.name}
+        editTitle={this.props.editTitle}
         replaceWorkspace={this.replaceWorkspace}
         deleteWorkspace={this.deleteWorkspace}/>
     );
 
+    if (this.state.loading) {
+      return (<span id="loading-spinner" className="spinner"></span>);
+    }
+
     return (
       <div id="workspace-wrapper">
-        {replaceWorkspaceForm}
+        {workspaceHeader}
         {listsContainer}
       </div>
     );

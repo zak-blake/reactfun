@@ -4,6 +4,18 @@ var NewListTitleForm = React.createClass({
     return {initialName: this.props.list.name, name: ''};
   },
 
+  componentDidMount(){
+    document.addEventListener("keydown", this.escFunction, false);
+  },
+  componentWillUnmount(){
+    document.removeEventListener("keydown", this.escFunction, false);
+  },
+  escFunction(event){
+    if(event.keyCode === 27) {
+      this.props.replaceAllInstancesOfList(this.props.list);
+    }
+  },
+
   handleNameChange: function(e) {
     this.setState({ name: e.target.value, initialName: null });
   },
@@ -44,6 +56,7 @@ var NewListTitleForm = React.createClass({
 
         <div className="input-group">
           <input type="text"
+            autoFocus value="true"
             placeholder="List name"
             value={ name }
             onChange={ this.handleNameChange }
@@ -56,8 +69,8 @@ var NewListTitleForm = React.createClass({
               <span className="glyphicon glyphicon-ok" aria-hidden="true"></span>
             </button>
 
-            <button onClick={this.handleCancelUpdate} className="btn btn-default">
-              <span className="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+            <button onClick={this.handleCancelUpdate} className="btn btn-default btn-slate">
+              <span className="glyphicon glyphicon-remove" aria-hidden="true"></span>
             </button>
           </span>
         </div>
